@@ -10,4 +10,6 @@
     <string name="queue">Queue</string>
     <string name="folders">Folders</string>
     <string name="help_and_feedback"><![CDATA[Help & Feedback]]></string>
+    <string name="album_art">Album Art</string>
+    <string name="separator">|</string>
 </resources>
