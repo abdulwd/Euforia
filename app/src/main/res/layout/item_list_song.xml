@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018 Abdul Wadood
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="88dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/item_list_song_album_art"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:src="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/item_list_song_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/song_name_top_margin"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingEnd="@dimen/zero"
+        android:paddingLeft="@dimen/medium_horizontal_padding"
+        android:paddingRight="@dimen/zero"
+        android:paddingStart="@dimen/medium_horizontal_padding"
+        android:textColor="@color/black"
+        android:textSize="@dimen/title_text_size"
+        app:layout_constraintLeft_toRightOf="@+id/item_list_song_album_art"
+        app:layout_constraintRight_toLeftOf="@+id/list_item_popup_menu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="spread" />
+
+    <TextView
+        android:id="@+id/item_list_artist_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingEnd="@dimen/zero"
+        android:paddingLeft="@dimen/medium_horizontal_padding"
+        android:paddingRight="@dimen/zero"
+        android:paddingStart="@dimen/medium_horizontal_padding"
+        android:textSize="@dimen/subheading_text_size"
+        app:layout_constraintLeft_toRightOf="@+id/item_list_song_album_art"
+        app:layout_constraintRight_toLeftOf="@+id/list_item_popup_menu"
+        app:layout_constraintTop_toBottomOf="@id/item_list_song_name"
+        app:layout_constraintWidth_default="spread" />
+
+    <ImageView
+        android:id="@+id/list_item_popup_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/zero"
+        android:contentDescription="@string/song_popup_menu"
+        android:paddingLeft="@dimen/small_horizontal_padding"
+        android:paddingRight="@dimen/small_horizontal_padding"
+        android:src="@drawable/ic_more_vert_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/item_list_artist_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_list_song_name" />
+
+</android.support.constraint.ConstraintLayout>

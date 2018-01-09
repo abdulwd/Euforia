@@ -17,23 +17,16 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.abdulwd.euforia.di.modules
+package com.abdulwd.euforia.data.db
 
-import com.abdulwd.euforia.di.scopes.ActivityScope
-import com.abdulwd.euforia.ui.main.MainActivity
-import com.abdulwd.euforia.ui.main.MainModule
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import com.abdulwd.euforia.models.Song
+import io.reactivex.Observable
+import org.jetbrains.anko.AnkoLogger
 
 /**
- * Dagger.Android annotation processor will create the sub-components. We also specify the modules
- * to be used by each sub-components and make Dagger.Android aware of a scope annotation
- * ([ActivityScope]).
+ * Contract for [AppLocalDataSource]
  */
 
-@Module
-abstract class ActivityBindingModule {
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [(MainModule::class)])
-    abstract fun mainActivity(): MainActivity
+interface LocalDataSource : AnkoLogger {
+    val songsList: Observable<List<Song>>
 }

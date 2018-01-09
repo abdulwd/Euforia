@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Abdul Wadood
+ * Copyright (c) 2018 Abdul Wadood
  *
  * Licensed under the GNU General Public License v3
  *
@@ -29,5 +29,7 @@ import javax.inject.Inject
 
 @ActivityScope
 class MainPresenter @Inject constructor() : MainContract.Presenter {
+
+    override var mView: MainContract.View? = null
 
 }

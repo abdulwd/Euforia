@@ -1,3 +1,22 @@
+<!--
+  ~ Copyright (c) 2018 Abdul Wadood
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
+  -->
+
 <resources>
     <string name="app_name">Euforia</string>
 
@@ -11,11 +30,15 @@
     <string name="folders">Folders</string>
     <string name="help_and_feedback"><![CDATA[Help & Feedback]]></string>
     <string name="album_art">Album Art</string>
-    <string name="separator">|</string>
     <string name="albums">Albums</string>
     <string name="artists">Artists</string>
     <string name="songs">Songs</string>
     <string name="genres">Genres</string>
+    <string name="search">Search</string>
+    <string name="sort">Sort</string>
+    <string name="song_popup_menu">Song Popup Menu</string>
+    <string name="permission_message">Kindly grant permission</string>
+    <string name="grant">Grant</string>
     <string-array name="tab_home">
         <item>@string/songs</item>
         <item>@string/albums</item>

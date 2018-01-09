@@ -17,23 +17,23 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.abdulwd.euforia.di.modules
+package com.abdulwd.euforia.models
 
-import com.abdulwd.euforia.di.scopes.ActivityScope
-import com.abdulwd.euforia.ui.main.MainActivity
-import com.abdulwd.euforia.ui.main.MainModule
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import android.provider.MediaStore
 
 /**
- * Dagger.Android annotation processor will create the sub-components. We also specify the modules
- * to be used by each sub-components and make Dagger.Android aware of a scope annotation
- * ([ActivityScope]).
+ * Data class for song.
  */
 
-@Module
-abstract class ActivityBindingModule {
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [(MainModule::class)])
-    abstract fun mainActivity(): MainActivity
+data class Song(val id: String,
+                val title: String,
+                val album: String,
+                val artist: String) {
+    companion object {
+        val projection = arrayOf(
+                MediaStore.Audio.Media._ID,
+                MediaStore.Audio.Media.TITLE,
+                MediaStore.Audio.Media.ALBUM,
+                MediaStore.Audio.Media.ARTIST)
+    }
 }

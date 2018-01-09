@@ -19,42 +19,41 @@
 
 package com.abdulwd.euforia.ui.main.song
 
-import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.abdulwd.euforia.R.layout.item_list_song
 import com.abdulwd.euforia.di.scopes.ActivityScope
-import com.abdulwd.euforia.ui.base.BaseFragment
+import com.abdulwd.euforia.models.Song
+import kotlinx.android.synthetic.main.item_list_song.view.*
 import javax.inject.Inject
 
 /**
- * This fragment displays the list of songs.
+ * An adapter for [SongFragment] for providing data.
  */
 
 @ActivityScope
-class SongFragment @Inject constructor() : BaseFragment(), SongContract.View {
+class SongAdapter @Inject constructor()
+    : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
+    lateinit var songList: List<Song>
 
-    override lateinit var recyclerView: RecyclerView
+    override fun getItemCount(): Int = songList.size
 
-    @Inject
-    lateinit var mPresenter: SongPresenter
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        recyclerView = RecyclerView(context)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        return recyclerView
+    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+        holder?.song?.text = songList[position].title
+        holder?.artist?.text = songList[position].artist
     }
 
-    override fun onResume() {
-        super.onResume()
-        mPresenter.bindView(this)
-        mPresenter.loadSongs()
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
+        return ViewHolder(LayoutInflater.from(parent?.context).inflate(item_list_song, parent, false))
     }
 
-    override fun onPause() {
-        mPresenter.unbindView()
-        super.onPause()
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var albumArt = itemView.item_list_song_album_art
+        var song = itemView.item_list_song_name
+        var artist = itemView.item_list_artist_name
+        var popupMenu = itemView.list_item_popup_menu
     }
+
 }

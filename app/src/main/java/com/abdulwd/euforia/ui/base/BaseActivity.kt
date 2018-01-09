@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Abdul Wadood
+ * Copyright (c) 2018 Abdul Wadood
  *
  * Licensed under the GNU General Public License v3
  *
@@ -26,14 +26,13 @@ import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import org.jetbrains.anko.AnkoLogger
 import javax.inject.Inject
 
 
 /**
  * All the activities used in the inherits from this activity.
  */
-abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector, AnkoLogger {
+abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     @Inject
     lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>

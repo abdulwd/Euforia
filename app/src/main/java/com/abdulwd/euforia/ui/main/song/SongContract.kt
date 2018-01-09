@@ -17,23 +17,23 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.abdulwd.euforia.di.modules
+package com.abdulwd.euforia.ui.main.song
 
-import com.abdulwd.euforia.di.scopes.ActivityScope
-import com.abdulwd.euforia.ui.main.MainActivity
-import com.abdulwd.euforia.ui.main.MainModule
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import android.support.v7.widget.RecyclerView
+import com.abdulwd.euforia.models.Song
+import com.abdulwd.euforia.ui.base.BaseContract
 
 /**
- * Dagger.Android annotation processor will create the sub-components. We also specify the modules
- * to be used by each sub-components and make Dagger.Android aware of a scope annotation
- * ([ActivityScope]).
+ * This specifies the contract between the view and the presenter.
  */
 
-@Module
-abstract class ActivityBindingModule {
-    @ActivityScope
-    @ContributesAndroidInjector(modules = [(MainModule::class)])
-    abstract fun mainActivity(): MainActivity
+interface SongContract {
+    interface View : BaseContract.View<Presenter> {
+        var recyclerView: RecyclerView
+    }
+
+    interface Presenter : BaseContract.Presenter<View> {
+        fun loadSongs()
+        fun setAdapterData(songList: List<Song>)
+    }
 }

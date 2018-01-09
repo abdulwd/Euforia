@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+  ~ Copyright (c) 2018 Abdul Wadood
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
@@ -12,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/album_art"
-        app:srcCompat="@mipmap/ic_launcher_foreground"/>
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
 
     <TextView
         android:id="@+id/nav_song_name"
@@ -26,42 +44,19 @@
         android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/nav_album_and_artist"
-        app:layout_goneMarginBottom="@dimen/nav_header_vertical_spacing"/>
+        app:layout_constraintBottom_toTopOf="@id/nav_artist_name" />
 
-    <LinearLayout
-        android:id="@+id/nav_album_and_artist"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/nav_artist_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/nav_header_vertical_spacing"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:scrollHorizontally="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/nav_album_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLength="10"
-            android:scrollHorizontally="true"/>
-
-        <TextView
-            android:id="@+id/nav_separator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:text="@string/separator"
-            app:layout_constraintLeft_toRightOf="@id/nav_album_name"/>
-
-        <TextView
-            android:id="@+id/nav_artist_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:scrollHorizontally="true"/>
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

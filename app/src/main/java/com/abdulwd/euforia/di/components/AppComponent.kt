@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017 Abdul Wadood
+ * Copyright (c) 2018 Abdul Wadood
  *
  * Licensed under the GNU General Public License v3
  *
@@ -20,6 +20,7 @@
 package com.abdulwd.euforia.di.components
 
 import com.abdulwd.euforia.EuforiaApp
+import com.abdulwd.euforia.data.DataModule
 import com.abdulwd.euforia.di.modules.ActivityBindingModule
 import com.abdulwd.euforia.di.modules.AppModule
 import com.abdulwd.euforia.ui.base.BaseActivity
@@ -32,9 +33,10 @@ import javax.inject.Singleton
  */
 
 @Singleton
-@Component(modules = arrayOf(AppModule::class,
-        ActivityBindingModule::class,
-        AndroidSupportInjectionModule::class))
+@Component(modules = [AppModule::class,
+    ActivityBindingModule::class,
+    AndroidSupportInjectionModule::class,
+    DataModule::class])
 interface AppComponent {
     fun inject(euforiaApp: EuforiaApp)
     fun inject(baseActivity: BaseActivity)
