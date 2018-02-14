@@ -22,8 +22,9 @@ package com.abdulwd.euforia.ui.main.song
 import com.abdulwd.euforia.data.AppDataManager
 import com.abdulwd.euforia.di.scopes.ActivityScope
 import com.abdulwd.euforia.models.Song
-import dagger.Lazy
 import io.reactivex.android.schedulers.AndroidSchedulers
+import org.jetbrains.anko.error
+import org.jetbrains.anko.info
 import javax.inject.Inject
 
 /**
@@ -39,17 +40,17 @@ class SongPresenter @Inject constructor() : SongContract.Presenter {
     lateinit var mAppDataManager: AppDataManager
 
     @Inject
-    lateinit var mLazySongAdapter: Lazy<SongAdapter>
+    lateinit var mLazySongAdapter: SongAdapter
 
-    override fun setAdapterData(songList: List<Song>) {
-        mLazySongAdapter.get().songList = songList
+    override fun setAdapterData(songs: List<Song>) {
+        mLazySongAdapter.songs = songs
     }
 
     override fun loadSongs() {
-        mAppDataManager.songsList.observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
+        mAppDataManager.songs.observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
                     setAdapterData(it)
-                    mView?.recyclerView?.adapter = mLazySongAdapter.get()
-                }
+                    mView?.recyclerView?.adapter = mLazySongAdapter
+                }, { error { it } }, { info { "Song list loaded" } })
     }
 }

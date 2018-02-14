@@ -17,23 +17,28 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.abdulwd.euforia.ui.main.song
+package com.abdulwd.euforia.utils
 
-import android.support.v7.widget.RecyclerView
-import com.abdulwd.euforia.models.Song
-import com.abdulwd.euforia.ui.base.BaseContract
+import android.widget.ImageView
+import com.abdulwd.euforia.R
+import com.squareup.picasso.Picasso
+import java.io.File
 
 /**
- * This specifies the contract between the view and the presenter.
+ * Contains function for image loading.
  */
 
-interface SongContract {
-    interface View : BaseContract.View<Presenter> {
-        var recyclerView: RecyclerView
-    }
-
-    interface Presenter : BaseContract.Presenter<View> {
-        fun loadSongs()
-        fun setAdapterData(songs: List<Song>)
+object ImageUtil {
+    fun loadImage(imageView: ImageView?, path: String?) {
+        if (path != null) {
+            Picasso.with(imageView?.context)
+                    .load(File(path))
+                    .placeholder(R.drawable.side_nav_bar)
+                    .into(imageView)
+        } else {
+            Picasso.with(imageView?.context)
+                    .load(R.mipmap.ic_launcher_round)
+                    .into(imageView)
+        }
     }
 }

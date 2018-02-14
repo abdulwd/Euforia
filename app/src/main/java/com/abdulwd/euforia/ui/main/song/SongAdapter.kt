@@ -26,7 +26,9 @@ import android.view.ViewGroup
 import com.abdulwd.euforia.R.layout.item_list_song
 import com.abdulwd.euforia.di.scopes.ActivityScope
 import com.abdulwd.euforia.models.Song
+import com.abdulwd.euforia.utils.ImageUtil
 import kotlinx.android.synthetic.main.item_list_song.view.*
+import org.jetbrains.anko.AnkoLogger
 import javax.inject.Inject
 
 /**
@@ -35,14 +37,15 @@ import javax.inject.Inject
 
 @ActivityScope
 class SongAdapter @Inject constructor()
-    : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
-    lateinit var songList: List<Song>
+    : RecyclerView.Adapter<SongAdapter.ViewHolder>(), AnkoLogger {
+    lateinit var songs: List<Song>
 
-    override fun getItemCount(): Int = songList.size
+    override fun getItemCount(): Int = songs.size
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.song?.text = songList[position].title
-        holder?.artist?.text = songList[position].artist
+        holder?.song?.text = songs[position].title
+        holder?.artist?.text = songs[position].artist
+        ImageUtil.loadImage(holder?.albumArt, songs[position].albumArtPath)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {

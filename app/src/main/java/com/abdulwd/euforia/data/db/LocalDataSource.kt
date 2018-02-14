@@ -28,5 +28,5 @@ import org.jetbrains.anko.AnkoLogger
  */
 
 interface LocalDataSource : AnkoLogger {
-    val songsList: Observable<List<Song>>
+    val songs: Observable<List<Song>>
 }

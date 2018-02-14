@@ -29,5 +29,5 @@ import javax.inject.Singleton
 
 @Singleton
 class AppDataManager @Inject constructor(localDataSource: LocalDataSource) : DataManager {
-    override val songsList = localDataSource.songsList
+    override val songs = localDataSource.songs
 }

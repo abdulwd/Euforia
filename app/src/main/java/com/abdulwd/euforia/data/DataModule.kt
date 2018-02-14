@@ -22,8 +22,8 @@ package com.abdulwd.euforia.data
 import android.content.Context
 import com.abdulwd.euforia.data.db.AppLocalDataSource
 import com.abdulwd.euforia.data.db.LocalDataSource
-import com.squareup.sqlbrite2.BriteContentResolver
-import com.squareup.sqlbrite2.SqlBrite
+import com.squareup.sqlbrite3.BriteContentResolver
+import com.squareup.sqlbrite3.SqlBrite
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers

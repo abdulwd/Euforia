@@ -26,14 +26,17 @@ import android.provider.MediaStore
  */
 
 data class Song(val id: String,
-                val title: String,
                 val album: String,
-                val artist: String) {
+                val albumId: String,
+                val artist: String,
+                val title: String,
+                val albumArtPath: String?) {
     companion object {
         val projection = arrayOf(
                 MediaStore.Audio.Media._ID,
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.ALBUM,
-                MediaStore.Audio.Media.ARTIST)
+                MediaStore.Audio.Media.ARTIST,
+                MediaStore.Audio.Media.ALBUM_ID)
     }
 }

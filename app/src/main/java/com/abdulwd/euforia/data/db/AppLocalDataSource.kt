@@ -19,11 +19,13 @@
 
 package com.abdulwd.euforia.data.db
 
+import android.database.Cursor
 import android.provider.MediaStore
+import com.abdulwd.euforia.libraries.sqlbrite.mapToMap
 import com.abdulwd.euforia.models.Song
-import com.squareup.sqlbrite2.BriteContentResolver
+import com.squareup.sqlbrite3.BriteContentResolver
 import io.reactivex.Observable
-import org.jetbrains.anko.info
+import io.reactivex.functions.Function
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -32,16 +34,38 @@ import javax.inject.Singleton
  */
 
 @Singleton
-class AppLocalDataSource @Inject constructor(mBriteContentResolver: BriteContentResolver) : LocalDataSource {
-    override val songsList: Observable<List<Song>> = mBriteContentResolver.createQuery(
+class AppLocalDataSource @Inject constructor(private val mBriteContentResolver: BriteContentResolver) : LocalDataSource {
+    override val songs: Observable<List<Song>> = mBriteContentResolver.createQuery(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Song.projection,
-            null, null, null, false)
-            .mapToList { cursor ->
-                val song = Song(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)),
-                        cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)))
-                info { song }
+            null, null, MediaStore.Audio.Media.TITLE, false)
+            .mapToList {
+                val id = it.getString(it.getColumnIndexOrThrow(MediaStore.Audio.Media._ID))
+                val album = it.getString(it.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM))
+                val albumId = it.getString(it.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID))
+                val artist = it.getString(it.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST))
+                val title = it.getString(it.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE))
+                val song = Song(id = id,
+                        album = album,
+                        albumId = albumId,
+                        artist = artist,
+                        title = title,
+                        albumArtPath = albumIdArtMap[albumId])
                 song
             }
+
+    private val albumIdArtMap: Map<String, String?> by lazy {
+        mBriteContentResolver.createQuery(
+                MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
+                arrayOf(MediaStore.Audio.Albums._ID, MediaStore.Audio.Albums.ALBUM_ART),
+                null,
+                null,
+                null,
+                false)
+                .mapToMap(Function<Cursor, Map.Entry<String, String?>> {
+                    return@Function object : Map.Entry<String, String?> {
+                        override val key: String = it.getString(it.getColumnIndexOrThrow(MediaStore.Audio.Albums._ID))
+                        override val value: String? = it.getString(it.getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM_ART))
+                    }
+                }).blockingFirst()
+    }
 }
